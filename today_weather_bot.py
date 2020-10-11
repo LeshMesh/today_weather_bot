@@ -19,12 +19,35 @@ def send_welcome(message):
 def echo_all(message):
 
     observation = mgr.weather_at_place(message.text)
+    
     w = observation.weather
     temp_now = w.temperature("celsius")['temp']
+    temp_day = w.temperature("celsius")['temp_max']
+    temp_night = w.temperature("celsius")['temp_min']
+    
+    wind_now_speed = w.wind()['speed']
+    wind_now_deg = w.wind()['deg']
+    if wind_now_deg > 337.6 and wind_now_deg < 22.5:
+        wind_now_deg = f'северный'
+    elif wind_now_deg > 22.6 and wind_now_deg < 67.5:
+        wind_now_deg = f'северо-восточный'
+    elif wind_now_deg > 67.6 and wind_now_deg < 112.5:
+        wind_now_deg = f'восточный'
+    elif wind_now_deg > 112.6 and wind_now_deg < 157.5:
+        wind_now_deg = f'юго-восточный'
+    elif wind_now_deg > 157.6 and wind_now_deg < 202.5:
+        wind_now_deg = f'южный'
+    elif wind_now_deg > 202.6 and wind_now_deg < 247.5:
+        wind_now_deg = f'юго-западный'
+    elif wind_now_deg > 247.6 and wind_now_deg < 292.5:
+        wind_now_deg = f'западный'
+    else:
+        wind_now_deg = f'северо-завадный'
     
     answer = (
         f'В городе {message.text} сейчас {w.detailed_status}. ' '\n'
-        f'Температура {temp_now}. '
+        f'Температура {temp_now}. Днем будет {temp_day}°C, ночью - {temp_night}°C.' '\n'
+        f'Ветер {wind_now_deg} {wind_now_speed} м/с'
     )
         
     
