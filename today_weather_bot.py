@@ -46,7 +46,7 @@ def send_weather(message):
 
         answer = (
             f'В городе {message.text} сейчас {w.detailed_status}. ' '\n'
-            f'Температура {temp_now}. Днем будет {temp_day}°C, ночью - {temp_night}°C.' '\n'
+            f'Температура {temp_now}. ' '\n'
             f'Ветер {wind_now_deg} {wind_now_speed} м/с'
         )
 
